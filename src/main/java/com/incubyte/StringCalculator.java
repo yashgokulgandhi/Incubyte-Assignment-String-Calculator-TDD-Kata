@@ -5,8 +5,7 @@ import java.util.Arrays;
 public class StringCalculator {
 
     public static int add(String input) {
-        if (input == null || input.isEmpty())
-            return 0;
+        if (input == null || input.isEmpty()) return 0;
 
 
         return Arrays.stream(input.split(","))
