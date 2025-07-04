@@ -58,4 +58,12 @@ class StringCalculatorTest {
     public void allFeaturesCombined() {
         assertEquals(15, StringCalculator.add("//[***][%]\n1***2%3,4\n5"));
     }
+
+    @Test
+    public void shouldTrackNumberOfAddCalls() {
+        StringCalculator.add("1,2");
+        StringCalculator.add("3");
+        assertEquals(2, StringCalculator.getCalledCount());
+    }
+
 }
