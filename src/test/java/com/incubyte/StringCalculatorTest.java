@@ -38,4 +38,10 @@ class StringCalculatorTest {
         );
         assertTrue(ex.getMessage().contains("-1") && ex.getMessage().contains("-3"));
     }
+
+    @Test
+    public void shouldIgnoreNumbersGreaterThan1000() {
+        assertEquals(2, StringCalculator.add("1001,2"));
+    }
+
 }
