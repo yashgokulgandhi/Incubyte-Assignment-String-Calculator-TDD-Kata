@@ -10,6 +10,11 @@ public class StringCalculator {
 
         input = input.replaceAll("\\n", ",");
 
+        if (input.startsWith("//")) {
+            String delim = Pattern.quote(input.substring(2, 3));
+            input = input.substring(4);
+            return Arrays.stream(input.split(delim)).mapToInt(Integer::parseInt).sum();
+        }
 
         return Arrays.stream(input.split(","))
                 .mapToInt(Integer::parseInt)
