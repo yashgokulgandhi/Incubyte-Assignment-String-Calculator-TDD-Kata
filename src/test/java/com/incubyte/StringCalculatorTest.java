@@ -10,4 +10,9 @@ class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertEquals(0, calculator.add(""), "Empty string should return 0");
     }
+
+    @Test
+    public void shouldSumTwoCommaSeparatedNumbers() {
+        assertEquals(3, StringCalculator.add("1,2"));
+    }
 }
