@@ -15,14 +15,20 @@ public class StringCalculator {
             String delimiterSection = input.substring(2, newlineIndex);
             input = input.substring(newlineIndex + 1);
 
-            String delimiter;
+            String delimiterRegex;
             if (delimiterSection.startsWith("[") && delimiterSection.endsWith("]")) {
-                delimiter = Pattern.quote(delimiterSection.substring(1, delimiterSection.length() - 1));
+                // Support one or more custom delimiters
+                List<String> delims = Arrays.stream(delimiterSection.split("\\]\\["))
+                        .map(s -> Pattern.quote(s.replace("[", "").replace("]", "")))
+                        .collect(Collectors.toList());
+                // ✅ include default delimiters
+                delimiterRegex = String.join("|", delims) + "|,|\n";
             } else {
-                delimiter = Pattern.quote(delimiterSection.substring(0, 1));
+                delimiterRegex = Pattern.quote(delimiterSection);
             }
 
-            String[] tokens = input.split(delimiter);
+
+            String[] tokens = input.split(delimiterRegex);
             List<Integer> list = Arrays.stream(tokens)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
@@ -31,8 +37,9 @@ public class StringCalculator {
                 throw new IllegalArgumentException("Negatives not allowed: " + negatives);
             }
 
-            return list.stream().filter(n -> n <= 1000).mapToInt(i -> i).sum(); // ✅ return here
+            return list.stream().filter(n -> n <= 1000).mapToInt(i -> i).sum();
         }
+
 
         // Normal case: no custom delimiter
         input = input.replaceAll("\\n", ",");

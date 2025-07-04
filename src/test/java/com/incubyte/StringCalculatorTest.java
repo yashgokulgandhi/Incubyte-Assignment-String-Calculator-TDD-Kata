@@ -53,4 +53,9 @@ class StringCalculatorTest {
     public void shouldSupportMultipleCustomDelimiters() {
         assertEquals(8, StringCalculator.add("//[*][%]\n1*2%5"));
     }
+
+    @Test
+    public void allFeaturesCombined() {
+        assertEquals(15, StringCalculator.add("//[***][%]\n1***2%3,4\n5"));
+    }
 }
