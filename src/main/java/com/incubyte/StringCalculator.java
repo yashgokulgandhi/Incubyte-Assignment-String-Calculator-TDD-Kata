@@ -6,8 +6,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
+    private static int callCount = 0;
 
     public static int add(String input) {
+
+        callCount++;
         if (input == null || input.isEmpty()) return 0;
 
         if (input.startsWith("//")) {
@@ -52,6 +55,10 @@ public class StringCalculator {
         }
 
         return list.stream().filter(n -> n <= 1000).mapToInt(i -> i).sum();
+    }
+
+    public static int getCalledCount() {
+        return callCount;
     }
 
 }
