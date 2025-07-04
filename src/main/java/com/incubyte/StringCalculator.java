@@ -27,8 +27,6 @@ public class StringCalculator {
             throw new IllegalArgumentException("Negatives not allowed: " + negatives);
         }
 
-        return Arrays.stream(input.split(","))
-                .mapToInt(Integer::parseInt)
-                .sum();
+        return list.stream().filter(n -> n <= 1000).mapToInt(i -> i).sum();
     }
 }
