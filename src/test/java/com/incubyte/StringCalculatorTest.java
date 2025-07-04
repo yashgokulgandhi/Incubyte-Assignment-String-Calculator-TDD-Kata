@@ -31,5 +31,11 @@ class StringCalculatorTest {
         assertEquals(3, StringCalculator.add("//;\n1;2"));
     }
 
-
+    @Test
+    public void shouldThrowExceptionForNegativeNumbers() {
+        Exception ex = assertThrows(IllegalArgumentException.class,
+                () -> StringCalculator.add("-1,2,-3")
+        );
+        assertTrue(ex.getMessage().contains("-1") && ex.getMessage().contains("-3"));
+    }
 }
